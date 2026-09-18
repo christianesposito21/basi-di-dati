@@ -1,7 +1,7 @@
 from django.db import models
 
 
-# 1. Dipartimento (deve stare prima di Docente e Corsodilaurea)
+
 class Dipartimento(models.Model):
     codice_dipartimento = models.CharField(max_length=10, primary_key=True)
     nome_dipartimento = models.CharField(max_length=100)
@@ -10,7 +10,6 @@ class Dipartimento(models.Model):
         return self.nome_dipartimento
 
 
-# 2. Corsodilaurea (deve stare prima di Studente e Corso)
 class Corsodilaurea(models.Model):
     codiceCDL = models.CharField(max_length=10, primary_key=True)
     nomecdl = models.CharField(max_length=100)
@@ -36,7 +35,7 @@ class Persona(models.Model):
         return f"{self.nome} {self.cognome}"
 
 
-# 4. Docente (eredita da Persona, Django crea la PK/FK automaticamente)
+# 4. Docente (eredita da Persona)
 class Docente(Persona):
     stipendio = models.IntegerField()
     ruolo = models.CharField(max_length=50)
@@ -48,7 +47,7 @@ class Docente(Persona):
         return f"{self.nome} {self.cognome} - Ruolo: {self.ruolo}"
 
 
-# 5. Studente (eredita da Persona, Django crea la PK/FK automaticamente)
+# 5. Studente (eredita da Persona)
 class Studente(Persona):
     matricola = models.CharField(max_length=20, unique=True)
     annoiscrizione = models.IntegerField()
@@ -58,7 +57,7 @@ class Studente(Persona):
         return f"{self.nome} {self.cognome} - Matricola: {self.matricola}"
 
 
-# 6. Corso (ha FK verso Docente e verso Corsodilaurea)
+# 6. Corso 
 class Corso(models.Model):
     codicecorso = models.CharField(max_length=10, primary_key=True)
     nomecorso = models.CharField(max_length=100)
