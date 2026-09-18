@@ -13,7 +13,7 @@ class Dipartimento(models.Model):
 class Corsodilaurea(models.Model):
     codiceCDL = models.CharField(max_length=10, primary_key=True)
     nomecdl = models.CharField(max_length=100)
-    livello = models.IntegerField()  # es. 1 per Triennale, 2 per Magistrale
+    livello = models.IntegerField()  
     codice_dipartimento = models.ForeignKey(
         Dipartimento, on_delete=models.CASCADE
     )
@@ -22,7 +22,7 @@ class Corsodilaurea(models.Model):
         return self.nomecdl
 
 
-# 3. Persona (Entità padre)
+# 3. Persona
 class Persona(models.Model):
     idpersona = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=100)
@@ -35,7 +35,7 @@ class Persona(models.Model):
         return f"{self.nome} {self.cognome}"
 
 
-# 4. Docente (eredita da Persona)
+# 4. Docente
 class Docente(Persona):
     stipendio = models.IntegerField()
     ruolo = models.CharField(max_length=50)
@@ -47,7 +47,7 @@ class Docente(Persona):
         return f"{self.nome} {self.cognome} - Ruolo: {self.ruolo}"
 
 
-# 5. Studente (eredita da Persona)
+# 5. Studente
 class Studente(Persona):
     matricola = models.CharField(max_length=20, unique=True)
     annoiscrizione = models.IntegerField()
@@ -70,7 +70,7 @@ class Corso(models.Model):
         return self.nomecorso
 
 
-# 7. Verbalizzazione (N:N tra Studente e Corso)
+# 7. Verbalizzazione 
 class Verbalizzazione(models.Model):
     idverbalizzazione = models.AutoField(primary_key=True)
     voto = models.IntegerField()
