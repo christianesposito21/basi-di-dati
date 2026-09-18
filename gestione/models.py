@@ -86,3 +86,4 @@ class Verbalizzazione(models.Model):
 
     def __str__(self):
         return f"{self.idstudente.matricola} - {self.codicecorso.nomecorso} : {self.voto}"
+    
